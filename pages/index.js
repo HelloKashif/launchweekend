@@ -29,17 +29,21 @@ const faqs = [
   },
 ];
 
+const makeTimer = () => {
+  const duration = intervalToDuration({
+    start: new Date(),
+    end: new Date("August 31, 2020 01:00:00 GMT+00:00"),
+  });
+  return formatDuration(duration);
+};
+
 export default function Home() {
   React.useEffect(() => {
     setInterval(() => {
-      const duration = intervalToDuration({
-        start: new Date(),
-        end: new Date("August 31, 2020 01:00:00 GMT+00:00"),
-      });
-      setCountdown(formatDuration(duration));
+      setCountdown(makeTimer());
     }, 1000);
   }, []);
-  const [countdown, setCountdown] = React.useState(null);
+  const [countdown, setCountdown] = React.useState(makeTimer());
 
   //
   return (
@@ -49,20 +53,21 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="">
-        <h1 className="text-2xl sm:text-6xl text-white sm:text-center font-bold sm:font-black">
-          Launch Weekend Hackathon
+      <main className="mt-8">
+        <h1 className="text-3xl sm:text-6xl leading-9 text-white text-center font-bold sm:font-black">
+          Launch Weekend <br />
+          <span className="font-medium text-3xl">Hackathon</span>
         </h1>
         {countdown && (
-          <div className="my-4 flex flex-col sm:items-center">
+          <div className="px-1 sm:px-0 my-8 max-w-xl mx-auto flex flex-col sm:items-center">
             <span className="uppercase tracking-wide">Ending In</span>
-            <span className="text-lg sm:text-2xl font-bold text-gray-900 px-3 py-1 inline-block rounded-sm bg-white">
+            <span className="text-lg sm:text-2xl w-full text-center font-bold text-gray-900 px-6 py-3 inline-block rounded-sm bg-white">
               {countdown}
             </span>
           </div>
         )}
 
-        <p className="text-xl sm:text-center max-w-xl mx-auto">
+        <p className="text-lg sm:text-xl px-1 sm:px-0 sm:text-center max-w-xl mx-auto">
           Launch Weekend is a monthly hackathon where your build something on
           your own and release it in public within 48 hours.
         </p>

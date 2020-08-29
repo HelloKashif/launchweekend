@@ -7,17 +7,43 @@ DONE:
     - make the events and project list public access
     - design the db schema
     - separate login/signup page
+    - users can create their projects
+    - projects can only be created for the active event (Not allowed once event is finished)
+    - faq list
+    - timer hidden on load fix it
 
 
 CURRENT:
+Header:
+    - My Projects
+    - New Project
+
 
 PENDING:
 - better countdown
 - get social login app registration done
-- users can create their projects
-- projects can only be created for the active event (Not allowed once event is finished)
-- faq list
 
+
+
+Filter:
+    - Filter by currently live streaming
+
+Upcoming schedules
+
+- Can upload images in description
+
+About us page
+    - Twitch/Tiwtter other social stuff
+
+
+Notification System for users
+    - for comments
+
+
+Likes system for projects
+
+Comment System
+    - for people to give and have a discussion
 
 
 
@@ -65,14 +91,6 @@ Security:
 
 
 
-
-faqs
-    - do we release within 48hr or after 48hr
-        - WITHIN
-    - is this only to launch a startup? No
-    - if I need help ??
-    - is this event going to be a monthly thing?
-        Yes last weekend of the month
 
 FUTURE:
 --------

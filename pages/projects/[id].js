@@ -2,7 +2,7 @@ import React from "react";
 import * as firebase from "firebase/app";
 import { useRouter } from "next/router";
 
-export default (props) => {
+const Project = (props) => {
   const router = useRouter();
   const { id } = router.query;
   const [project, setProject] = React.useState(null);
@@ -28,3 +28,4 @@ export default (props) => {
     </div>
   );
 };
+export default Project;

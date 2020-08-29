@@ -1,8 +1,11 @@
 import React from "react";
 import Link from "next/link";
+import ProfileDropdown from "../components/profile-dropdown";
+import { useRouter } from "next/router";
 import * as firebase from "firebase/app";
 
-export default (props) => {
+const Header = (props) => {
+  const router = useRouter();
   const [user, setUser] = React.useState(null);
   React.useEffect(() => {
     //@Todo cleanup destryo
@@ -11,30 +14,32 @@ export default (props) => {
     });
   }, []);
 
-  const handleLogout = (e) => {
-    firebase
-      .auth()
-      .signOut()
-      .then(function () {
-        setUser(null);
-      })
-      .catch(function (error) {
-        //@Todo handle error
-      });
-  };
-
   return (
-    <header className="mx-auto max-w-6xl flex items-center justify-end px-4 py-2">
+    <header className="mx-auto max-w-6xl flex items-center justify-between px-4 py-2">
+      <div
+        className={`${
+          router.pathname === "/" ? "opacity-0 pointer-events-none" : ""
+        }`}
+      >
+        <Link href="/">
+          <a className="font-semibold hover:bg-white hover:text-gray-900 px-3 py-0 inline-block rounded-sm">
+            Launch Weekend
+          </a>
+        </Link>
+      </div>
       {user ? (
-        <div className="flex justify-end items-center">
-          <h4 className="px-3 ">{user.displayName}</h4>
-
-          <button
-            onClick={handleLogout}
-            className="border rounded-md px-4 py-2 leading-none font-medium"
-          >
-            Logout
-          </button>
+        <div className="flex justify-end items-center space-x-4">
+          <Link href="/myprojects">
+            <a className="hover:bg-gray-600 px-3 rounded inline-block">
+              My Projects
+            </a>
+          </Link>
+          <Link href="/projects/create">
+            <a className="hover:bg-gray-600 px-3 rounded inline-block">
+              New Project
+            </a>
+          </Link>
+          <ProfileDropdown />
         </div>
       ) : (
         <div>
@@ -48,3 +53,4 @@ export default (props) => {
     </header>
   );
 };
+export default Header;

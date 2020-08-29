@@ -18,7 +18,7 @@ const ProjectCard = (props) => {
   );
 };
 
-export default (props) => {
+const Projects = (props) => {
   const [projects, setProjects] = React.useState([]);
   React.useEffect(() => {
     const db = firebase.firestore();
@@ -48,3 +48,5 @@ export default (props) => {
     </ul>
   );
 };
+
+export default Projects;

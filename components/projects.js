@@ -1,17 +1,20 @@
 import React from "react";
 import * as firebase from "firebase/app";
+import Link from "next/link";
 
 const ProjectCard = (props) => {
   const { project } = props;
   return (
-    <div className="w-80 h-48 shadow-md hover:shadow-lg transition duration-150 px-4 py-3 rounded-lg flex flex-col items-center">
-      <div className="w-full">
-        <h5 className="text-md font-medium">{project.name}</h5>
-        <span className="text-sm font-medium text-gray-600">
-          {project.user}
-        </span>
-      </div>
-    </div>
+    <Link href={`/projects/${project.id}`}>
+      <a className="w-80 h-48 shadow-md hover:shadow-lg transition duration-150 px-4 py-3 rounded-lg flex flex-col items-center">
+        <div className="w-full">
+          <h5 className="text-md font-medium">{project.name}</h5>
+          <span className="text-sm font-medium text-gray-600">
+            {project.user}
+          </span>
+        </div>
+      </a>
+    </Link>
   );
 };
 

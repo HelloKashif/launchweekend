@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import * as firebase from "firebase/app";
 
 export default (props) => {
@@ -22,24 +23,6 @@ export default (props) => {
       });
   };
 
-  const handleSignup = (e) => {
-    e.preventDefault();
-    signup();
-  };
-
-  const signup = () => {
-    var provider = new firebase.auth.GoogleAuthProvider();
-    firebase
-      .auth()
-      .signInWithPopup(provider)
-      .then(function (result) {
-        setUser(result.user);
-      })
-      .catch(function (error) {
-        //@TOdo handle errors
-        console.log(error);
-      });
-  };
   return (
     <header className="w-full px-3 py-2">
       <div className="flex items-center justify-end">
@@ -56,11 +39,11 @@ export default (props) => {
           </div>
         ) : (
           <div>
-            <form onSubmit={handleSignup}>
-              <button className="border rounded px-4 py-2 leading-none font-medium">
-                Signup with Google
-              </button>
-            </form>
+            <Link href="/login">
+              <a className="border rounded px-4 py-2 leading-none font-medium">
+                Login/Signup
+              </a>
+            </Link>
           </div>
         )}
       </div>

@@ -1,20 +1,77 @@
-
-
 DONE:
-Buy domain
-setup base nextjs project + github
-firebase auth LOGIN setup
-firebase database setup
+    Buy domain
+    setup base nextjs project + github
+    firebase auth LOGIN setup
+    firebase database setup
+    setup domain integration
+    - make the events and project list public access
+    - design the db schema
+    - separate login/signup page
 
 
-
+CURRENT:
 
 PENDING:
-setup domain integration
-more better countdown
-some way for people to submit their projects
-fill faqs
+- better countdown
+- get social login app registration done
+- users can create their projects
+- projects can only be created for the active event (Not allowed once event is finished)
+- faq list
 
+
+
+
+Database Schema
+-----------------
+
+
+    /users
+        - Name
+        - Profile Pic
+        - Social Links
+        - Projects
+        - Events
+
+
+    /events
+        - Date
+
+
+    /projects
+        - Name
+        - Event ID
+        - User ID
+        - User Profile Photo
+        - Link (Public link)
+        - Is Live streaming
+
+
+Query:
+    - list all events
+    - list all projects in an event
+    - get the user info for any project
+    - get all projects created by a user
+    - get a user info
+    - list all users participating in any event
+
+Security:
+    - users public info should be visible (profile pic, projects, events)
+    - events are readable but users cannot write( only admins can create new event)
+    - projects can only be created by the user whose userId is in the payload
+    - project can be edited/deleted by the same user
+    - projects should be visible to pubcli but not editable
+
+
+
+
+
+
+faqs
+    - is this only to launch a startup? No
+    - if I need help ??
     - is this event going to be a monthly thing?
         Yes last weekend of the month
 
+FUTURE:
+--------
+    How about teams and submitting a project as a team??

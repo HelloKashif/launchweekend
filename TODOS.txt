@@ -3,9 +3,10 @@
 DONE:
 Buy domain
 setup base nextjs project + github
-
-
 firebase auth LOGIN setup
+
+
+firebase database setup
 
 
 PENDING:
@@ -13,4 +14,3 @@ setup domain integration
 more better countdown
 fill faqs
 
-firebase database setup

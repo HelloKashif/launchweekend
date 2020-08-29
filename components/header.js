@@ -41,27 +41,29 @@ export default (props) => {
       });
   };
   return (
-    <div>
-      {user ? (
-        <div>
-          <h4>{user.displayName}</h4>
+    <header className="w-full px-3 py-2">
+      <div className="flex items-center justify-end">
+        {user ? (
+          <div className="flex justify-end items-center">
+            <h4 className="px-3 ">{user.displayName}</h4>
 
-          <button
-            onClick={handleLogout}
-            className="border rounded px-4 py-2 leading-none font-medium"
-          >
-            Logout
-          </button>
-        </div>
-      ) : (
-        <div>
-          <form onSubmit={handleSignup}>
-            <button className="border rounded px-4 py-2 leading-none font-medium">
-              Signup with Google
+            <button
+              onClick={handleLogout}
+              className="border rounded-md px-4 py-2 leading-none font-medium"
+            >
+              Logout
             </button>
-          </form>
-        </div>
-      )}
-    </div>
+          </div>
+        ) : (
+          <div>
+            <form onSubmit={handleSignup}>
+              <button className="border rounded px-4 py-2 leading-none font-medium">
+                Signup with Google
+              </button>
+            </form>
+          </div>
+        )}
+      </div>
+    </header>
   );
 };

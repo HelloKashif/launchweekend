@@ -4,13 +4,17 @@ DONE:
 Buy domain
 setup base nextjs project + github
 firebase auth LOGIN setup
-
-
 firebase database setup
+
+
 
 
 PENDING:
 setup domain integration
 more better countdown
+some way for people to submit their projects
 fill faqs
+
+    - is this event going to be a monthly thing?
+        Yes last weekend of the month
 

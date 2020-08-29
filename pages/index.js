@@ -1,9 +1,11 @@
 import Head from "next/head";
 import * as firebase from "firebase/app";
 import Header from "../components/header";
+import Projects from "../components/projects";
 // import "firebase/analytics";
 
 import "firebase/auth";
+import "firebase/firestore";
 import { formatDuration, intervalToDuration } from "date-fns";
 
 //@Todo move these to env config
@@ -60,6 +62,9 @@ export default function Home() {
           <ul>
             <li>Question 1</li>
           </ul>
+        </section>
+        <section>
+          <Projects />
         </section>
       </main>
     </div>

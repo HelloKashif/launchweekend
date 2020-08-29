@@ -1,22 +1,24 @@
 import React from "react";
 import * as firebase from "firebase/app";
 
-const useProjects = () => {
+const useProjects = (filterLive = false) => {
   const [projects, setProjects] = React.useState([]);
   React.useEffect(() => {
     const db = firebase.firestore();
+    let ref = db.collection(`/projects`);
+
+    if (filterLive) {
+      ref = ref.where("streamingLive", "==", true);
+    }
     //@Todo limit the query for projects to within current events
-    db.collection(`/projects`).onSnapshot((snap) => {
+    return ref.onSnapshot((snap) => {
       let newProjecs = [];
       snap.forEach((doc) => {
         newProjecs.push({ id: doc.id, ...doc.data() });
       });
       setProjects(newProjecs);
     });
-    //.catch((err) => {
-    //  //@Todo hadnle errors
-    //});
-  }, []);
+  }, [filterLive]);
 
   return projects;
 };

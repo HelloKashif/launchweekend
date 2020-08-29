@@ -14,6 +14,9 @@ DONE:
     Header:
     - My Projects
     - New Project
+    - Filter by currently live streaming
+    - can edit my project
+    - can delete my project
 
 
 CURRENT:
@@ -25,8 +28,6 @@ PENDING:
 
 
 
-Filter:
-    - Filter by currently live streaming
 
 Upcoming schedules
 

@@ -37,17 +37,14 @@ export default (props) => {
   }, []);
 
   return (
-    <div className="">
-      <h4 className="text-xl font-medium">Ongoing Projects</h4>
-      <ul className="flex flex-wrap">
-        {projects.map((item) => {
-          return (
-            <li key={item.id} className="mr-3">
-              <ProjectCard project={item} />
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+    <ul className="flex flex-wrap">
+      {projects.map((item) => {
+        return (
+          <li key={item.id} className="mr-3">
+            <ProjectCard project={item} />
+          </li>
+        );
+      })}
+    </ul>
   );
 };

@@ -1,46 +1,17 @@
 import React from "react";
-import * as firebase from "firebase/app";
+import firebase from "../lib/firebase";
 import Link from "next/link";
-
-const ProjectCard = (props) => {
-  const { project } = props;
-  return (
-    <Link href={`/projects/${project.id}`}>
-      <a className="w-80 h-48 bg-white shadow-md hover:shadow-lg transition duration-150 px-4 py-3 rounded-lg flex flex-col items-center">
-        <div className="w-full">
-          <h5 className="text-md font-medium text-gray-900">{project.name}</h5>
-          <span className="text-sm font-medium text-gray-600">
-            {project.user}
-          </span>
-        </div>
-      </a>
-    </Link>
-  );
-};
+import ProjectCard from "../components/project-card";
+import { useProjects } from "../hooks/db";
 
 const Projects = (props) => {
-  const [projects, setProjects] = React.useState([]);
-  React.useEffect(() => {
-    const db = firebase.firestore();
-    db.collection(`/projects`)
-      .get()
-      .then((snap) => {
-        let newProjecs = [];
-        snap.forEach((doc) => {
-          newProjecs.push({ id: doc.id, ...doc.data() });
-        });
-        setProjects(newProjecs);
-      })
-      .catch((err) => {
-        //@Todo hadnle errors
-      });
-  }, []);
+  const projects = useProjects();
 
   return (
-    <ul className="flex flex-wrap">
+    <ul className="flex flex-col items-center">
       {projects.map((item) => {
         return (
-          <li key={item.id} className="mr-3">
+          <li key={item.id} className="mb-1 max-w-xl w-full">
             <ProjectCard project={item} />
           </li>
         );

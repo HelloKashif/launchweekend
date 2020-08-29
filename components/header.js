@@ -1,18 +1,13 @@
 import React from "react";
 import Link from "next/link";
 import ProfileDropdown from "../components/profile-dropdown";
+import useAuth from "../hooks/auth";
 import { useRouter } from "next/router";
 import * as firebase from "firebase/app";
 
 const Header = (props) => {
   const router = useRouter();
-  const [user, setUser] = React.useState(null);
-  React.useEffect(() => {
-    //@Todo cleanup destryo
-    firebase.auth().onAuthStateChanged(function (user) {
-      setUser(user);
-    });
-  }, []);
+  const user = useAuth();
 
   return (
     <header className="mx-auto max-w-6xl flex items-center justify-between px-4 py-2">

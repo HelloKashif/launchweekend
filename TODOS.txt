@@ -11,12 +11,12 @@ DONE:
     - projects can only be created for the active event (Not allowed once event is finished)
     - faq list
     - timer hidden on load fix it
+    Header:
+    - My Projects
+    - New Project
 
 
 CURRENT:
-Header:
-    - My Projects
-    - New Project
 
 
 PENDING:

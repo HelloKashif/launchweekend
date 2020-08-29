@@ -24,29 +24,27 @@ export default (props) => {
   };
 
   return (
-    <header className="w-full px-3 py-2">
-      <div className="flex items-center justify-end">
-        {user ? (
-          <div className="flex justify-end items-center">
-            <h4 className="px-3 ">{user.displayName}</h4>
+    <header className="mx-auto max-w-6xl flex items-center justify-end px-4 py-2">
+      {user ? (
+        <div className="flex justify-end items-center">
+          <h4 className="px-3 ">{user.displayName}</h4>
 
-            <button
-              onClick={handleLogout}
-              className="border rounded-md px-4 py-2 leading-none font-medium"
-            >
-              Logout
-            </button>
-          </div>
-        ) : (
-          <div>
-            <Link href="/login">
-              <a className="inline-block border hover:bg-white hover:text-gray-900 transition duration-150 rounded text-sm leading-none px-4 py-2 font-medium">
-                Login
-              </a>
-            </Link>
-          </div>
-        )}
-      </div>
+          <button
+            onClick={handleLogout}
+            className="border rounded-md px-4 py-2 leading-none font-medium"
+          >
+            Logout
+          </button>
+        </div>
+      ) : (
+        <div>
+          <Link href="/login">
+            <a className="inline-block border hover:bg-white hover:text-gray-900 transition duration-150 rounded text-sm leading-none px-4 py-2 font-medium">
+              Login
+            </a>
+          </Link>
+        </div>
+      )}
     </header>
   );
 };

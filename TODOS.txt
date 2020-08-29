@@ -67,6 +67,8 @@ Security:
 
 
 faqs
+    - do we release within 48hr or after 48hr
+        - WITHIN
     - is this only to launch a startup? No
     - if I need help ??
     - is this event going to be a monthly thing?

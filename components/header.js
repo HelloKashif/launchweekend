@@ -40,8 +40,8 @@ export default (props) => {
         ) : (
           <div>
             <Link href="/login">
-              <a className="border rounded px-4 py-2 leading-none font-medium">
-                Login/Signup
+              <a className="inline-block border hover:bg-white hover:text-gray-900 transition duration-150 rounded text-sm leading-none px-4 py-2 font-medium">
+                Login
               </a>
             </Link>
           </div>

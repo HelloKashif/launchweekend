@@ -1,10 +1,73 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { useProject } from "../../hooks/db";
+import { useProject, useVoted } from "../../hooks/db";
 import useAuth from "../../hooks/auth";
 import Modal from "../../components/modal";
 import ProjectDetails from "../../components/project-detail";
+import Spinner from "../../components/spinner";
 import db from "../../lib/db";
+
+const VoteButton = (props) => {
+  const { project } = props;
+  const { voted, loading } = useVoted(project.id);
+  const [voting, setVoting] = React.useState(false);
+  const handleVote = async (e) => {
+    setVoting(true);
+    try {
+      if (voted) {
+        await db.removeVote(project.id);
+      } else {
+        await db.addVote(project.id);
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setVoting(false);
+    }
+  };
+
+  return (
+    <button
+      disabled={voting}
+      onClick={handleVote}
+      className={`flex items-center text-sm group hover:border-gray-100 hover:bg-gray-700 hover:text-white justify-center border-white ${
+        voted ? "bg-gray-800 text-gray-100" : "text-black bg-white"
+      } w-48 px-4 py-3`}
+    >
+      {voting || loading ? (
+        <Spinner />
+      ) : (
+        <>
+          {voted ? (
+            <svg
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              className="w-5 h-5 mr-1 text-blue-500"
+            >
+              <path d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z"></path>
+            </svg>
+          ) : (
+            <svg
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              className="thumb-up w-5 h-5 mr-1 text-blue-400"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"
+              ></path>
+            </svg>
+          )}
+          {voted ? "Upvoted" : "Upvote"}{" "}
+          {project.votes && project.votes > 0 ? `(${project.votes})` : ``}
+        </>
+      )}
+    </button>
+  );
+};
 
 const Project = (props) => {
   const router = useRouter();
@@ -53,15 +116,6 @@ const Project = (props) => {
       };
       await db.updateProject(id, data);
       router.reload();
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const handleVote = async (e) => {
-    try {
-      const resp = await db.addVote(project.id);
-      console.log("resp", resp);
     } catch (err) {
       console.log(err);
     }
@@ -174,31 +228,15 @@ const Project = (props) => {
           </div>
         )}
       </div>
-      <div className="px-1 sm:px-0 space-x-6 lg:flex items-center">
+      <div className="px-1 sm:px-0 space-x-6 flex flex-col lg:flex-row items-center">
         <div className="flex-1">
           <ProjectDetails project={project} />
         </div>
-        <div className="">
-          <button
-            onClick={handleVote}
-            className="flex items-center justify-center border-white bg-white w-48 text-black px-4 py-3"
-          >
-            <svg
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              className="thumb-up w-6 h-6 text-blue-400"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"
-              ></path>
-            </svg>
-            Upvote
-          </button>
-        </div>
+        {project && (
+          <div className="max-w-3xl mx-auto flex flex-col items-center">
+            <VoteButton project={project} />
+          </div>
+        )}
       </div>
     </div>
   );

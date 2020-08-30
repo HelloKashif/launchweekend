@@ -67,7 +67,7 @@ exports.removeVote = functions.https.onCall(async (data, context) => {
       await firestore.runTransaction(async (t) => {
         await ref.delete();
         await projectRef.update({
-          votes: admin.firestore.FieldValue.decrement(1),
+          votes: admin.firestore.FieldValue.increment(-1),
         });
       });
     } catch (e) {

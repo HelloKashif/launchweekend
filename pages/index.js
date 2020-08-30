@@ -47,23 +47,25 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="mt-12 px-2 sm:px-0">
+      <main className="mt-24 mb-24 px-2 sm:px-0">
         <h1 className="text-5xl sm:text-7xl leading-9 text-white sm:text-center font-bold sm:font-black">
           {config.title}
         </h1>
         <p className="mt-10 text-lg sm:text-xl sm:text-center max-w-xl mx-auto">
           {config.description}
         </p>
-        <div className="px-1 sm:px-0 my-8 mx-auto flex flex-col sm:items-center">
-          <span className="uppercase tracking-wide">
-            Current Event Ending In
-          </span>
-          <Countdown endDate={endDate} />
+        <div className="my-8 mx-auto flex flex-col sm:items-center">
+          <div className="border-2 border-teal-200 rounded-md px-4 py-6 flex flex-col sm:items-center">
+            <span className="uppercase tracking-wide">
+              Current Event Ending In
+            </span>
+            <Countdown endDate={endDate} />
+          </div>
         </div>
-        <section className="max-w-3xl mx-auto my-8">
-          <RecentProjects />
-        </section>
       </main>
+      <section className="max-w-3xl mx-auto my-8">
+        <RecentProjects />
+      </section>
     </div>
   );
 }

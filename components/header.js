@@ -17,6 +17,11 @@ const Header = (props) => {
             Launch Weekend
           </a>
         </Link>
+        <Link href="/projects">
+          <a className="uppercase tracking-wide text-sm font-semibold hover:bg-white hover:text-gray-900 text-gray-400 px-3 py-0 inline-block rounded-sm">
+            Projects
+          </a>
+        </Link>
       </div>
       {user ? (
         <div className="flex justify-end items-center space-x-4">

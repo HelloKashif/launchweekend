@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Projects = (props) => {
   const [filterLive, setFilterLive] = React.useState(false);
-  const projects = useProjects(filterLive);
+  const projects = useProjects({ filterLive });
   return (
     <div className="max-w-6xl mx-auto">
       <h2 className="font-bold text-2xl text-center">Current Projects</h2>

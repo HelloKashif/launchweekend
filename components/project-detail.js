@@ -2,7 +2,7 @@ const ProjectDetails = (props) => {
   const { project } = props;
   if (!project) return null;
   return (
-    <div className="mt-4">
+    <div className="mt-4 mx-auto max-w-3xl">
       <h2 className="text-xl sm:text-3xl">{project.name}</h2>
       <section className="my-2 w-full text-white bg-gray-700 px-3 py-2 rounded-sm">
         <p>{project.description}</p>

@@ -1,5 +1,6 @@
 import React from "react";
 import * as firebase from "firebase/app";
+import useAuth from "./auth";
 
 const useProjects = ({ filterLive, limit }) => {
   const [projects, setProjects] = React.useState([]);
@@ -31,17 +32,28 @@ const useProject = (id) => {
   React.useEffect(() => {
     if (!id) return;
     const db = firebase.firestore();
-    db.doc(`/projects/${id}`)
-      .get()
-      .then((doc) => {
-        setProject({ id: doc.id, ...doc.data() });
-      })
-      .catch((err) => {
-        //@Todo hadnle errors
-      });
+    db.doc(`/projects/${id}`).onSnapshot((doc) => {
+      setProject({ id: doc.id, ...doc.data() });
+    });
   }, [id]);
 
   return project;
 };
+const useVoted = (id) => {
+  const user = useAuth();
+  const [voted, setVoted] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
+  React.useEffect(() => {
+    if (!id) return;
+    if (!user) return;
+    const db = firebase.firestore();
+    return db.doc(`/users/${user.uid}/votes/${id}`).onSnapshot((doc) => {
+      setVoted(doc.exists);
+      setLoading(false);
+    });
+  }, [id, user]);
 
-export { useProjects, useProject };
+  return { voted, loading };
+};
+
+export { useVoted, useProjects, useProject };

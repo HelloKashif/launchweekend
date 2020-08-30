@@ -5,6 +5,10 @@
   @apply bg-red-300 !important;
 }
 
+html {
+  @apply bg-gray-900;
+}
+
 .flex-center {
   @apply flex items-center justify-center;
 }

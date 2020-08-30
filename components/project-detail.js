@@ -7,6 +7,18 @@ const ProjectDetails = (props) => {
       <section className="my-2 w-full text-white bg-gray-700 px-3 py-2 rounded-sm">
         <p>{project.description}</p>
       </section>
+      {project.publicUrl && (
+        <div>
+          <span>Public Link:</span>
+          <a
+            target="_blank"
+            href={project.publicUrl}
+            className="ml-2 py-0 text-sm border-b-2 border-gray-600 hover:border-blue-400 text-blue-400"
+          >
+            {project.publicUrl}
+          </a>
+        </div>
+      )}
       <div>
         <div className="my-3 sm:flex justify-end items-center">
           {project.streamingLive && project.streamLink && (

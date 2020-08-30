@@ -1,9 +1,10 @@
 import React from "react";
 import { useRouter } from "next/router";
-import { useProject, useVoted } from "../../hooks/db";
+import { useComment, useProject, useVoted } from "../../hooks/db";
 import useAuth from "../../hooks/auth";
 import Modal from "../../components/modal";
 import ProjectDetails from "../../components/project-detail";
+import Comments from "../../components/comments";
 import Spinner from "../../components/spinner";
 import db from "../../lib/db";
 
@@ -83,14 +84,17 @@ const Project = (props) => {
   const [error, setError] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
   const [name, setName] = React.useState("");
+  const [publicUrl, setPublicUrl] = React.useState("");
   const [streamLink, setStreamLink] = React.useState("");
   const handleStreamLinkChange = (e) => setStreamLink(e.target.value);
   const handleDescChange = (e) => setDescription(e.target.value);
+  const handlePublicUrlChange = (e) => setPublicUrl(e.target.value);
   const handleNameChange = (e) => setName(e.target.value);
 
   React.useEffect(() => {
     if (!project) return;
     setName(project.name);
+    setPublicUrl(project.publicUrl);
     setDescription(project.description);
     setStreamLink(project.streamLink);
     setStreamingLive(project.streamingLive);
@@ -112,6 +116,7 @@ const Project = (props) => {
         name,
         description,
         streamLink,
+        publicUrl,
         streamingLive,
       };
       await db.updateProject(id, data);
@@ -149,6 +154,18 @@ const Project = (props) => {
                   value={description}
                   onChange={handleDescChange}
                   className="form-textarea h-32 text-gray-900"
+                />
+              </section>
+              <section className="flex flex-col mt-2">
+                <label htmlFor="publicUrl" className="my-1 text-gray-300">
+                  Public URL
+                </label>
+                <input
+                  name="publicUrl"
+                  value={publicUrl}
+                  onChange={handlePublicUrlChange}
+                  className="form-input text-gray-900"
+                  placeholder="https://your-public-live-link.com"
                 />
               </section>
               <div className="my-2 flex items-center justify-between">
@@ -231,9 +248,10 @@ const Project = (props) => {
       <div className="px-1 sm:px-0 space-x-6 flex flex-col lg:flex-row items-center">
         <div className="flex-1">
           <ProjectDetails project={project} />
+          {project && <Comments project={project} />}
         </div>
         {project && (
-          <div className="max-w-3xl mx-auto flex flex-col items-center">
+          <div className="max-w-3xl mt-3 lg:mt-0 mx-auto flex flex-col items-center">
             <VoteButton project={project} />
           </div>
         )}

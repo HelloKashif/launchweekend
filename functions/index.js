@@ -9,6 +9,12 @@ const validateAuth = (context) => {
   }
 };
 
+exports.onProjectCreated = functions.firestore
+  .document("projects/{projectId}")
+  .onCreate((snap, context) => {
+    return snap.ref.set({ votes: 0 }, { merge: true });
+  });
+
 exports.addVote = functions.https.onCall(async (data, context) => {
   validateAuth(context);
   const { uid } = context.auth;

@@ -20,22 +20,37 @@ DONE:
     - better countdown
     - move faq to separate page
     - fix back to projects button /create page
+    - research how to do upvote system with firebase
+    Likes/Upvotes system for projects
+    - project page beautify
+- header not responsive
+    - get social login app registration done
+    - featured projects
+    - enable social logins
+    - background behind scroll in white
+About us page
+    - Twitch/Tiwtter other social stuff
+    - Comment System
+
+
+
+
+
+    - add public url for the project (Eventually)
+
+
 
 
 CURRENT:
-- add github links on create project page
-- add public url for the project (Eventually)
-- project page beautify
+    - add github links on create project page
 - better fonts (More developery)
-- research how to do upvote system with firebase
 
 
 PENDING:
-- get social login app registration done
-- featured projects
 - projects can have github/etc links
 - profile can have a github/etc link
 - periodically check if the twitch stream link is live or not
+- privacy and terms page
 
 
 
@@ -44,15 +59,12 @@ Upcoming schedules
 
 - Can upload images in description
 
-About us page
-    - Twitch/Tiwtter other social stuff
 
 
 Notification System for users
     - for comments
 
 
-Likes/Upvotes system for projects
 
 Comment System
     - for people to give and have a discussion
@@ -75,6 +87,12 @@ Database Schema
             [projectid]: true
 
 
+    /comments
+        - msg
+        - from
+        - projectId
+        - parentId
+
     /events
         - Date
 
@@ -87,6 +105,11 @@ Database Schema
         - User Profile Photo
         - Link (Public link)
         - Is Live streaming
+
+        /comments
+            - msg
+            - from
+            - parentId
 
 
 Query:

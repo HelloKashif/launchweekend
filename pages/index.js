@@ -47,7 +47,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="mt-24 mb-24 px-2 sm:px-0">
+      <main className="mt-12 sm:mt-24 mb-24 px-2 sm:px-0">
         <h1 className="text-5xl sm:text-7xl leading-9 text-white sm:text-center font-bold sm:font-black">
           {config.title}
         </h1>

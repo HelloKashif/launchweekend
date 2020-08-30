@@ -7,12 +7,14 @@ const CreateProject = (props) => {
   const router = useRouter();
   const [streamingLive, setStreamingLive] = React.useState(false);
   const [description, setDescription] = React.useState("");
+  const [publicUrl, setPublicUrl] = React.useState("");
   const [error, setError] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
   const [name, setName] = React.useState("");
   const [streamLink, setStreamLink] = React.useState("");
   const handleStreamLinkChange = (e) => setStreamLink(e.target.value);
   const handleDescChange = (e) => setDescription(e.target.value);
+  const handlePublicUrlChange = (e) => setPublicUrl(e.target.value);
   const handleNameChange = (e) => setName(e.target.value);
 
   const handleSubmit = async (e) => {
@@ -24,6 +26,7 @@ const CreateProject = (props) => {
         name,
         description,
         streamLink,
+        publicUrl,
         streamingLive,
       });
       router.push(`/projects/${project.id}`);
@@ -60,6 +63,19 @@ const CreateProject = (props) => {
             value={description}
             onChange={handleDescChange}
             className="form-textarea h-32 text-gray-900"
+          />
+        </section>
+        <section className="flex flex-col max-w-md mx-auto mt-2">
+          <label htmlFor="description" className="my-1 text-gray-300">
+            Public URL (Later can be okay)
+          </label>
+          <input
+            name="publicUrl"
+            type="url"
+            placeholder="https://your-project-live.com"
+            value={publicUrl}
+            onChange={handlePublicUrlChange}
+            className="form-input text-gray-900"
           />
         </section>
         <section className="flex max-w-md mx-auto mt-2">

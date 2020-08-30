@@ -2,10 +2,12 @@ import React from "react";
 import firebase from "../lib/firebase";
 import useOnClickOutside from "../hooks/onclick-outside";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
-export default (props) => {
+const Dropdown = (props) => {
   const [open, setOpen] = React.useState(false);
   const ref = React.useRef();
+  const router = useRouter();
   useOnClickOutside(ref, () => setOpen(false));
 
   //Auto close dropdown while navigating
@@ -15,7 +17,7 @@ export default (props) => {
 
   const handleLogout = (e) => {
     firebase.auth().signOut();
-    navigate("/");
+    router.push("/");
   };
 
   const user = firebase.auth().currentUser;
@@ -69,6 +71,39 @@ export default (props) => {
                 <strong className="font-medium">{user.email} </strong>
               </p>
             </div>
+            <div className="sm:hidden border-t border-gray-500" />
+            <div className="sm:hidden ">
+              <Link href="/projects/create">
+                <a
+                  onClick={() => setOpen(false)}
+                  className="group flex items-center space-x-2 block w-full text-left px-4 py-3 leading-5 hover:bg-gray-100 hover:text-gray-900 focus:outline-none font-medium focus:bg-gray-100 focus:text-gray-900"
+                >
+                  <span className="">Create a Project</span>
+                </a>
+              </Link>
+            </div>
+            <div className="sm:hidden border-t border-gray-500" />
+            <div className="sm:hidden ">
+              <Link href="/faq">
+                <a
+                  onClick={() => setOpen(false)}
+                  className="group flex items-center space-x-2 block w-full text-left px-4 py-3 leading-5 hover:bg-gray-100 hover:text-gray-900 focus:outline-none font-medium focus:bg-gray-100 focus:text-gray-900"
+                >
+                  <span className="">FAQs</span>
+                </a>
+              </Link>
+            </div>
+            <div className="sm:hidden border-t border-gray-500" />
+            <div className="sm:hidden ">
+              <Link href="/projects">
+                <a
+                  onClick={() => setOpen(false)}
+                  className="group flex items-center space-x-2 block w-full text-left px-4 py-3 leading-5 hover:bg-gray-100 hover:text-gray-900 focus:outline-none font-medium focus:bg-gray-100 focus:text-gray-900"
+                >
+                  <span className="">All Projects</span>
+                </a>
+              </Link>
+            </div>
             <div className="border-t border-gray-500" />
             <div className="">
               <Link href="/myprojects">
@@ -95,3 +130,4 @@ export default (props) => {
     </div>
   );
 };
+export default Dropdown;

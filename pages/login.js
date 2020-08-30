@@ -1,6 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import googleLogo from "../images/google-logo.svg";
+import githubLogo from "../images/GitHub-Mark-32px.png";
+import twitterLogo from "../images/Twitter_Logo_Blue.png";
 import router from "next/router";
 import firebase from "../lib/firebase";
 
@@ -23,9 +25,6 @@ const Login = (props) => {
         break;
       case "twitter":
         provider = new firebase.auth.TwitterAuthProvider();
-        break;
-      case "facebook":
-        provider = new firebase.auth.FacebookAuthProvider();
         break;
       default:
         break;
@@ -59,40 +58,30 @@ const Login = (props) => {
         <div className="mt-6">
           <button
             onClick={() => handleLogin("google")}
-            className="flex justify-center items-center w-full text-center py-2 px-4 border border-gray-300 rounded-md font-medium hover:border-gray-800 focus:shadow-outline focus:outline-none focus:border-gray-400 sm:text-sm hover:bg-white hover:text-gray-900 bg-white text-gray-900 sm:leading-5 transform duration-100 scale-100 active:scale-95"
+            className="flex justify-center items-center hover:bg-gray-100 w-full text-center py-2 px-4 border border-gray-300 rounded-sm font-medium hover:border-gray-800 focus:shadow-outline focus:outline-none focus:border-gray-400 sm:text-sm hover:bg-white hover:text-gray-900 bg-white text-gray-900 sm:leading-5 transform duration-100 scale-100 active:scale-95"
           >
             <img alt="Google" className="w-6 h-6" src={googleLogo} />
             <span className="ml-2">Log In with Google</span>
           </button>
         </div>
-        {false && (
-          <>
-            <div className="mt-3">
-              <button
-                onClick={() => handleLogin("github")}
-                className="flex justify-center items-center w-full text-center py-2 px-4 border border-gray-300 rounded-md font-medium hover:border-gray-800 focus:shadow-outline focus:outline-none focus:border-gray-400 sm:text-sm hover:bg-white hover:text-gray-900 bg-white text-gray-900 sm:leading-5 transform duration-100 scale-100 active:scale-95"
-              >
-                <span className="ml-2">Log In with Github</span>
-              </button>
-            </div>
-            <div className="mt-3">
-              <button
-                onClick={() => handleLogin("twitter")}
-                className="flex justify-center items-center w-full text-center py-2 px-4 border border-gray-300 rounded-md font-medium hover:border-gray-800 focus:shadow-outline focus:outline-none focus:border-gray-400 sm:text-sm hover:bg-white hover:text-gray-900 bg-white text-gray-900 sm:leading-5 transform duration-100 scale-100 active:scale-95"
-              >
-                <span className="ml-2">Log In with Twitter</span>
-              </button>
-            </div>
-            <div className="mt-3">
-              <button
-                onClick={() => handleLogin("facebook")}
-                className="flex justify-center items-center w-full text-center py-2 px-4 border border-gray-300 rounded-md font-medium hover:border-gray-800 focus:shadow-outline focus:outline-none focus:border-gray-400 sm:text-sm hover:bg-white hover:text-gray-900 bg-white text-gray-900 sm:leading-5 transform duration-100 scale-100 active:scale-95"
-              >
-                <span className="ml-2">Log In with Facebook</span>
-              </button>
-            </div>
-          </>
-        )}
+        <div className="mt-3">
+          <button
+            onClick={() => handleLogin("github")}
+            className="flex justify-center items-center w-full hover:bg-gray-100 text-center py-2 px-4 border border-gray-300 rounded-sm font-medium hover:border-gray-800 focus:shadow-outline focus:outline-none focus:border-gray-400 sm:text-sm hover:bg-white hover:text-gray-900 bg-white text-gray-900 sm:leading-5 transform duration-100 scale-100 active:scale-95"
+          >
+            <img alt="GitHub" className="w-6 h-6" src={githubLogo} />
+            <span className="ml-2">Log In with Github</span>
+          </button>
+        </div>
+        <div className="mt-3">
+          <button
+            onClick={() => handleLogin("twitter")}
+            className="flex justify-center items-center w-full hover:bg-gray-100 text-center py-2 px-4 border border-gray-300 rounded-sm font-medium hover:border-gray-800 focus:shadow-outline focus:outline-none focus:border-gray-400 sm:text-sm hover:bg-white hover:text-gray-900 bg-white text-gray-900 sm:leading-5 transform duration-100 scale-100 active:scale-95"
+          >
+            <img alt="Twitter" className="w-6 h-6" src={twitterLogo} />
+            <span className="ml-2">Log In with Twitter</span>
+          </button>
+        </div>
       </div>
     </div>
   );

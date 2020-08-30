@@ -2,6 +2,28 @@ import React from "react";
 import * as firebase from "firebase/app";
 import useAuth from "./auth";
 
+const useComment = (id) => {
+  const [comments, setComments] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
+  React.useEffect(() => {
+    if (!id) return;
+    const db = firebase.firestore();
+    //@Todo limit the query size
+    db.collection(`/projects/${id}/comments`)
+      .limit(50)
+      .get()
+      .then((snap) => {
+        let newComments = [];
+        snap.forEach((doc) => {
+          newComments.push({ id: doc.id, ...doc.data() });
+        });
+        setComments(newComments);
+        setLoading(false);
+      });
+  }, [id]);
+
+  return { comments, loading };
+};
 const useProjects = ({ filterLive, limit }) => {
   const [projects, setProjects] = React.useState([]);
   React.useEffect(() => {
@@ -32,7 +54,7 @@ const useProject = (id) => {
   React.useEffect(() => {
     if (!id) return;
     const db = firebase.firestore();
-    db.doc(`/projects/${id}`).onSnapshot((doc) => {
+    return db.doc(`/projects/${id}`).onSnapshot((doc) => {
       setProject({ id: doc.id, ...doc.data() });
     });
   }, [id]);
@@ -56,4 +78,4 @@ const useVoted = (id) => {
   return { voted, loading };
 };
 
-export { useVoted, useProjects, useProject };
+export { useComment, useVoted, useProjects, useProject };

@@ -17,15 +17,20 @@ DONE:
     - Filter by currently live streaming
     - can edit my project
     - can delete my project
+    - better countdown
+    - move faq to separate page
+    - fix back to projects button /create page
 
 
 CURRENT:
-    - better countdown
+- add github links on create project page
+- add public url for the project (Eventually)
+- project page beautify
+- better fonts (More developery)
+- research how to do upvote system with firebase
 
 
 PENDING:
-- move faq to separate page
-- better fonts (More developery)
 - get social login app registration done
 - featured projects
 - projects can have github/etc links
@@ -47,10 +52,11 @@ Notification System for users
     - for comments
 
 
-Likes system for projects
+Likes/Upvotes system for projects
 
 Comment System
     - for people to give and have a discussion
+    - moderation
 
 
 

@@ -16,8 +16,8 @@ const Countdown = (props) => {
     <div className="text-lg sm:text-2xl text-center font-bold text-gray-900 px-6 py-3 inline-block rounded-sm bg-white">
       <div className="flex justify-center space-x-2">
         {duration.years > 0 && (
-          <section className="w-36 px-6 bg-gray-100 rounded py-3 flex flex-col items-center">
-            <span className="text-6xl leading-none font-black">
+          <section className="sm:w-36 px-6 bg-gray-100 rounded py-3 flex flex-col items-center">
+            <span className="text-4xl sm:text-6xl leading-none font-black">
               {duration.years}
             </span>
             <span className="font-semibold text-gray-700 uppercase tracking-wide text-base">
@@ -26,8 +26,8 @@ const Countdown = (props) => {
           </section>
         )}
         {duration.months > 0 && (
-          <section className="w-36 px-6 bg-gray-100 rounded py-3 flex flex-col items-center">
-            <span className="text-6xl leading-none font-black">
+          <section className="sm:w-36 px-6 bg-gray-100 rounded py-3 flex flex-col items-center">
+            <span className="text-4xl sm:text-6xl leading-none font-black">
               {duration.months}
             </span>
             <span className="font-semibold text-gray-700 uppercase tracking-wide text-base">
@@ -36,8 +36,8 @@ const Countdown = (props) => {
           </section>
         )}
         {duration.days > 0 && (
-          <section className="w-36 px-6 bg-gray-100 rounded py-3 flex flex-col items-center">
-            <span className="text-6xl leading-none font-black">
+          <section className="sm:w-36 px-6 bg-gray-100 rounded py-3 flex flex-col items-center">
+            <span className="text-4xl sm:text-6xl leading-none font-black">
               {duration.days}
             </span>
             <span className="font-semibold text-gray-700 uppercase tracking-wide text-base">
@@ -46,8 +46,8 @@ const Countdown = (props) => {
           </section>
         )}
         {duration.hours > 0 && (
-          <section className="w-36 px-6 bg-gray-100 rounded py-3 flex flex-col items-center">
-            <span className="text-6xl leading-none font-black">
+          <section className="sm:w-36 px-6 bg-gray-100 rounded py-3 flex flex-col items-center">
+            <span className="text-4xl sm:text-6xl leading-none font-black">
               {duration.hours}
             </span>
             <span className="font-semibold text-gray-700 uppercase tracking-wide text-base">
@@ -55,19 +55,17 @@ const Countdown = (props) => {
             </span>
           </section>
         )}
-        {duration.minutes > 0 && (
-          <section className="w-36 px-6 bg-gray-100 rounded py-3 flex flex-col items-center">
-            <span className="text-6xl leading-none font-black">
-              {duration.minutes}
-            </span>
-            <span className="font-semibold text-gray-700 uppercase tracking-wide text-base">
-              minutes
-            </span>
-          </section>
-        )}
-        {duration.days < 1 && duration.seconds > 0 && (
-          <section className="w-36 px-6 bg-gray-100 rounded py-3 flex flex-col items-center">
-            <span className="text-6xl leading-none font-black">
+        <section className="sm:w-36 px-6 bg-gray-100 rounded py-3 flex flex-col items-center">
+          <span className="text-4xl sm:text-6xl leading-none font-black">
+            {duration.minutes}
+          </span>
+          <span className="font-semibold text-gray-700 uppercase tracking-wide text-base">
+            minutes
+          </span>
+        </section>
+        {duration.days < 1 && (
+          <section className="sm:w-36 px-6 bg-gray-100 rounded py-3 flex flex-col items-center">
+            <span className="text-4xl sm:text-6xl leading-none font-black">
               {duration.seconds}
             </span>
             <span className="font-semibold text-gray-700 uppercase tracking-wide text-base">
@@ -118,7 +116,7 @@ export default function Home() {
         </div>
 
         <section className="flex-center my-8">
-          <Link className="" href="/projects">
+          <Link href="/projects">
             <a className="border hover:border-white hover:bg-white hover:text-gray-900 rounded-sm text-sm font-medium transition duration-150 border-gray-600 px-4 py-2">
               View Active Projects
             </a>

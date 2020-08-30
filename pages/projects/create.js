@@ -26,7 +26,7 @@ export const Spinner = (props) => {
 
 const CreateProject = (props) => {
   const router = useRouter();
-  const [streamingLive, setStreamingLive] = React.useState(true);
+  const [streamingLive, setStreamingLive] = React.useState(false);
   const [description, setDescription] = React.useState("");
   const [error, setError] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
@@ -58,11 +58,6 @@ const CreateProject = (props) => {
 
   return (
     <div>
-      <Link href="/projects">
-        <a className="transition duration-150 border-b border-gray-600 hover:border-gray-200 rounded-sm text-sm leading-none pl-3 pr-4 py-1">
-          {"<"} Back to Projects
-        </a>
-      </Link>
       <form onSubmit={handleSubmit} className="max-w-3xl mx-auto">
         <h2 className="font-bold text-2xl text-center">Create a New Project</h2>
         <section className="flex flex-col max-w-md mx-auto mt-2">

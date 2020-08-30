@@ -10,9 +10,33 @@ const ProjectCard = (props) => {
             <h5 className="text-md font-medium text-gray-900">
               {project.name}
             </h5>
-            <span className="text-sm font-medium text-gray-600">
-              {project.userId}
-            </span>
+            <div className="flex items-center justify-end">
+              {project.photoURL ? (
+                <img
+                  src={project.photoURL}
+                  className="w-8 h-8 rounded-full border-2 border-gray-500"
+                />
+              ) : (
+                <svg
+                  className="my-auto border-2 rounded-full p-1 border-gray-500 h-8 w-8 text-gray-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                  />
+                </svg>
+              )}
+              {project.username && (
+                <span className="ml-2 text-sm text-gray-800">
+                  {project.username}
+                </span>
+              )}
+            </div>
           </div>
         </a>
       </Link>

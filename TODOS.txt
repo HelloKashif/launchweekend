@@ -20,11 +20,16 @@ DONE:
 
 
 CURRENT:
+    - better countdown
 
 
 PENDING:
-- better countdown
+- move faq to separate page
+- better fonts (More developery)
 - get social login app registration done
+- featured projects
+- projects can have github/etc links
+- profile can have a github/etc link
 
 
 

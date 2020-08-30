@@ -1,10 +1,12 @@
 import React from "react";
 import firebase from "../lib/firebase";
+import useOnClickOutside from "../hooks/onclick-outside";
 import Link from "next/link";
 
 export default (props) => {
   const [open, setOpen] = React.useState(false);
   const ref = React.useRef();
+  useOnClickOutside(ref, () => setOpen(false));
 
   //Auto close dropdown while navigating
   React.useEffect(() => {
@@ -66,6 +68,17 @@ export default (props) => {
                 <br />
                 <strong className="font-medium">{user.email} </strong>
               </p>
+            </div>
+            <div className="border-t border-gray-500" />
+            <div className="">
+              <Link href="/myprojects">
+                <a
+                  onClick={() => setOpen(false)}
+                  className="group flex items-center space-x-2 block w-full text-left px-4 py-3 leading-5 hover:bg-gray-100 hover:text-gray-900 focus:outline-none font-medium focus:bg-gray-100 focus:text-gray-900"
+                >
+                  <span className="">My Projects</span>
+                </a>
+              </Link>
             </div>
             <div className="border-t border-gray-500" />
             <div className="">

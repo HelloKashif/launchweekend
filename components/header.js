@@ -24,10 +24,8 @@ const Header = (props) => {
       </div>
       {user ? (
         <div className="flex justify-end items-center space-x-4">
-          <Link href="/myprojects">
-            <a className="hover:bg-gray-600 px-3 rounded inline-block">
-              My Projects
-            </a>
+          <Link href="/faq">
+            <a className="hover:bg-gray-600 px-3 rounded inline-block">FAQ</a>
           </Link>
           <Link href="/projects/create">
             <a className="hover:bg-gray-600 px-3 rounded inline-block">

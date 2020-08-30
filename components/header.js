@@ -11,11 +11,7 @@ const Header = (props) => {
 
   return (
     <header className="mx-auto max-w-6xl flex items-center justify-between px-4 py-2">
-      <div
-        className={`${
-          router.pathname === "/" ? "opacity-0 pointer-events-none" : ""
-        }`}
-      >
+      <div>
         <Link href="/">
           <a className="font-semibold hover:bg-white hover:text-gray-900 px-3 py-0 inline-block rounded-sm">
             Launch Weekend

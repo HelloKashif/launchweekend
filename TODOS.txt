@@ -63,6 +63,7 @@ Comment System
 Database Schema
 -----------------
 
+/api/addVote removeVote
 
     /users
         - Name
@@ -70,6 +71,8 @@ Database Schema
         - Social Links
         - Projects
         - Events
+        - upvotes
+            [projectid]: true
 
 
     /events
@@ -77,6 +80,7 @@ Database Schema
 
 
     /projects
+        - votes: 4
         - Name
         - Event ID
         - User ID

@@ -58,6 +58,15 @@ const Project = (props) => {
     }
   };
 
+  const handleVote = async (e) => {
+    try {
+      const resp = await db.addVote(project.id);
+      console.log("resp", resp);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="max-w-6xl mx-auto">
       <div className="flex justify-end">
@@ -170,7 +179,10 @@ const Project = (props) => {
           <ProjectDetails project={project} />
         </div>
         <div className="">
-          <button className="flex items-center justify-center border-white bg-white w-48 text-black px-4 py-3">
+          <button
+            onClick={handleVote}
+            className="flex items-center justify-center border-white bg-white w-48 text-black px-4 py-3"
+          >
             <svg
               fill="none"
               viewBox="0 0 24 24"

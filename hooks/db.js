@@ -1,7 +1,7 @@
 import React from "react";
 import * as firebase from "firebase/app";
 
-const useProjects = (filterLive = false) => {
+const useProjects = ({ filterLive, limit }) => {
   const [projects, setProjects] = React.useState([]);
   React.useEffect(() => {
     const db = firebase.firestore();
@@ -9,6 +9,10 @@ const useProjects = (filterLive = false) => {
 
     if (filterLive) {
       ref = ref.where("streamingLive", "==", true);
+    }
+
+    if (limit) {
+      ref = ref.limit(limit);
     }
     //@Todo limit the query for projects to within current events
     return ref.onSnapshot((snap) => {

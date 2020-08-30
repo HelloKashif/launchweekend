@@ -1,92 +1,40 @@
 import Head from "next/head";
 import Link from "next/link";
+import Countdown from "../components/countdown";
+import ProjectCard from "../components/project-card-2";
+import { useProjects } from "../hooks/db";
 
-import { formatDuration, intervalToDuration, format } from "date-fns";
-
-const Countdown = (props) => {
-  const { endDate } = props;
-  const [duration, setDuration] = React.useState(makeDuration(endDate));
-  React.useEffect(() => {
-    const timer = setInterval(() => {
-      setDuration(makeDuration(endDate));
-    }, 1000);
-    return () => clearInterval(timer);
-  }, [endDate]);
+const RecentProjects = (props) => {
+  const projects = useProjects({ limit: 5 });
   return (
-    <div className="text-lg sm:text-2xl text-center font-bold text-gray-900 px-6 py-3 inline-block rounded-sm bg-white">
-      <div className="flex justify-center space-x-2">
-        {duration.years > 0 && (
-          <section className="sm:w-36 px-6 bg-gray-100 rounded py-3 flex flex-col items-center">
-            <span className="text-4xl sm:text-6xl leading-none font-black">
-              {duration.years}
-            </span>
-            <span className="font-semibold text-gray-700 uppercase tracking-wide text-base">
-              years
-            </span>
-          </section>
-        )}
-        {duration.months > 0 && (
-          <section className="sm:w-36 px-6 bg-gray-100 rounded py-3 flex flex-col items-center">
-            <span className="text-4xl sm:text-6xl leading-none font-black">
-              {duration.months}
-            </span>
-            <span className="font-semibold text-gray-700 uppercase tracking-wide text-base">
-              months
-            </span>
-          </section>
-        )}
-        {duration.days > 0 && (
-          <section className="sm:w-36 px-6 bg-gray-100 rounded py-3 flex flex-col items-center">
-            <span className="text-4xl sm:text-6xl leading-none font-black">
-              {duration.days}
-            </span>
-            <span className="font-semibold text-gray-700 uppercase tracking-wide text-base">
-              days
-            </span>
-          </section>
-        )}
-        {duration.hours > 0 && (
-          <section className="sm:w-36 px-6 bg-gray-100 rounded py-3 flex flex-col items-center">
-            <span className="text-4xl sm:text-6xl leading-none font-black">
-              {duration.hours}
-            </span>
-            <span className="font-semibold text-gray-700 uppercase tracking-wide text-base">
-              hours
-            </span>
-          </section>
-        )}
-        <section className="sm:w-36 px-6 bg-gray-100 rounded py-3 flex flex-col items-center">
-          <span className="text-4xl sm:text-6xl leading-none font-black">
-            {duration.minutes}
-          </span>
-          <span className="font-semibold text-gray-700 uppercase tracking-wide text-base">
-            minutes
-          </span>
-        </section>
-        {duration.days < 1 && (
-          <section className="sm:w-36 px-6 bg-gray-100 rounded py-3 flex flex-col items-center">
-            <span className="text-4xl sm:text-6xl leading-none font-black">
-              {duration.seconds}
-            </span>
-            <span className="font-semibold text-gray-700 uppercase tracking-wide text-base">
-              seconds
-            </span>
-          </section>
-        )}
+    <div>
+      <div className="flex items-center justify-between">
+        <h3 className="text-xl font-light">What people are working on</h3>
+        <Link href="/projects">
+          <a className="border-b-2 hover:border-white hover:text-white text-gray-200 text-sm font-medium transition duration-150 border-gray-600 px-2 py-1">
+            View All Projects
+          </a>
+        </Link>
       </div>
-      <span className="text-sm italic font-normal">
-        Ends {format(endDate, "PPPppp")}
-      </span>
+      <ul className="mt-4 grid  grid-cols-1 justify-center sm:grid-cols-2 lg:grid-cols-3 col-gap-6 row-gap-2">
+        {projects.map((item) => {
+          return (
+            <li key={item.id} className="">
+              <ProjectCard project={item} />
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 };
 
-const makeDuration = (endDate) => {
-  const duration = intervalToDuration({
-    start: new Date(),
-    end: endDate,
-  });
-  return duration;
+const config = {
+  title: "Launch Weekend",
+  description: `
+          Launch Weekend is a monthly hackathon where your build something on
+          your own and release it in public within 48 hours.
+    `,
 };
 
 export default function Home() {
@@ -100,13 +48,11 @@ export default function Home() {
       </Head>
 
       <main className="mt-12 px-2 sm:px-0">
-        <h1 className="text-5xl sm:text-6xl leading-9 text-white sm:text-center font-bold sm:font-black">
-          Launch Weekend <br />
-          <span className="font-medium text-2xl sm:text-3xl">Hackathon</span>
+        <h1 className="text-5xl sm:text-7xl leading-9 text-white sm:text-center font-bold sm:font-black">
+          {config.title}
         </h1>
-        <p className="mt-6 text-lg sm:text-xl sm:text-center max-w-xl mx-auto">
-          Launch Weekend is a monthly hackathon where your build something on
-          your own and release it in public within 48 hours.
+        <p className="mt-10 text-lg sm:text-xl sm:text-center max-w-xl mx-auto">
+          {config.description}
         </p>
         <div className="px-1 sm:px-0 my-8 mx-auto flex flex-col sm:items-center">
           <span className="uppercase tracking-wide">
@@ -114,13 +60,8 @@ export default function Home() {
           </span>
           <Countdown endDate={endDate} />
         </div>
-
-        <section className="flex-center my-8">
-          <Link href="/projects">
-            <a className="border hover:border-white hover:bg-white hover:text-gray-900 rounded-sm text-sm font-medium transition duration-150 border-gray-600 px-4 py-2">
-              View Active Projects
-            </a>
-          </Link>
+        <section className="max-w-3xl mx-auto my-8">
+          <RecentProjects />
         </section>
       </main>
     </div>

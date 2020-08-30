@@ -5,7 +5,8 @@ import ProjectCard from "../components/project-card";
 import { useProjects } from "../hooks/db";
 
 const Projects = (props) => {
-  const projects = useProjects();
+  const { limit } = props;
+  const projects = useProjects({ limit });
 
   return (
     <ul className="flex flex-col items-center">

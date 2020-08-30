@@ -30,6 +30,7 @@ PENDING:
 - featured projects
 - projects can have github/etc links
 - profile can have a github/etc link
+- periodically check if the twitch stream link is live or not
 
 
 

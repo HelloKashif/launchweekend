@@ -3,23 +3,95 @@ import Link from "next/link";
 
 import { formatDuration, intervalToDuration } from "date-fns";
 
-const makeTimer = () => {
+const Countdown = (props) => {
+  const { endDate } = props;
+  const [duration, setDuration] = React.useState(makeDuration(endDate));
+  React.useEffect(() => {
+    setInterval(() => {
+      setDuration(makeDuration(endDate));
+    }, 1000);
+  }, [endDate]);
+  return (
+    <div className="text-lg sm:text-2xl text-center font-bold text-gray-900 px-6 py-3 inline-block rounded-sm bg-white">
+      <div className="flex justify-center">
+        {duration.years > 0 && (
+          <section className="px-6 flex flex-col items-center">
+            <span className="text-6xl leading-none font-black">
+              {duration.years}
+            </span>
+            <span className="font-semibold text-gray-700 uppercase tracking-wide text-base">
+              years
+            </span>
+          </section>
+        )}
+        {duration.months > 0 && (
+          <section className="px-6 flex flex-col items-center">
+            <span className="text-6xl leading-none font-black">
+              {duration.months}
+            </span>
+            <span className="font-semibold text-gray-700 uppercase tracking-wide text-base">
+              months
+            </span>
+          </section>
+        )}
+        {duration.days > 0 && (
+          <section className="px-6 flex flex-col items-center">
+            <span className="text-6xl leading-none font-black">
+              {duration.days}
+            </span>
+            <span className="font-semibold text-gray-700 uppercase tracking-wide text-base">
+              days
+            </span>
+          </section>
+        )}
+        {duration.hours > 0 && (
+          <section className="px-6 flex flex-col items-center">
+            <span className="text-6xl leading-none font-black">
+              {duration.hours}
+            </span>
+            <span className="font-semibold text-gray-700 uppercase tracking-wide text-base">
+              hours
+            </span>
+          </section>
+        )}
+        {duration.minutes > 0 && (
+          <section className="px-6 flex flex-col items-center">
+            <span className="text-6xl leading-none font-black">
+              {duration.minutes}
+            </span>
+            <span className="font-semibold text-gray-700 uppercase tracking-wide text-base">
+              minutes
+            </span>
+          </section>
+        )}
+        {duration.seconds > 0 && (
+          <section className="px-6 flex flex-col items-center">
+            <span className="text-6xl leading-none font-black">
+              {duration.seconds}
+            </span>
+            <span className="font-semibold text-gray-700 uppercase tracking-wide text-base">
+              seconds
+            </span>
+          </section>
+        )}
+      </div>
+      <span className="text-sm italic font-normal">
+        Ends {endDate.toString()}
+      </span>
+    </div>
+  );
+};
+
+const makeDuration = (endDate) => {
   const duration = intervalToDuration({
     start: new Date(),
-    end: new Date("August 31, 2020 01:00:00 GMT+00:00"),
+    end: endDate,
   });
-  return formatDuration(duration);
+  return duration;
 };
 
 export default function Home() {
-  React.useEffect(() => {
-    setInterval(() => {
-      setCountdown(makeTimer());
-    }, 1000);
-  }, []);
-  const [countdown, setCountdown] = React.useState(makeTimer());
-
-  //
+  const endDate = new Date("August 31, 2020 01:00:00 GMT+00:00");
   return (
     <div className="">
       <Head>
@@ -32,20 +104,16 @@ export default function Home() {
           Launch Weekend <br />
           <span className="font-medium text-2xl sm:text-3xl">Hackathon</span>
         </h1>
-        <p className="mt-2 text-lg sm:text-xl sm:text-center max-w-xl mx-auto">
+        <p className="mt-6 text-lg sm:text-xl sm:text-center max-w-xl mx-auto">
           Launch Weekend is a monthly hackathon where your build something on
           your own and release it in public within 48 hours.
         </p>
-        {countdown && (
-          <div className="px-1 sm:px-0 my-8 max-w-xl mx-auto flex flex-col sm:items-center">
-            <span className="uppercase tracking-wide">
-              Current Event Ending In
-            </span>
-            <span className="text-lg sm:text-2xl w-full text-center font-bold text-gray-900 px-6 py-3 inline-block rounded-sm bg-white">
-              {countdown}
-            </span>
-          </div>
-        )}
+        <div className="px-1 sm:px-0 my-8 mx-auto flex flex-col sm:items-center">
+          <span className="uppercase tracking-wide">
+            Current Event Ending In
+          </span>
+          <Countdown endDate={endDate} />
+        </div>
 
         <section className="flex-center my-8">
           <Link className="" href="/projects">

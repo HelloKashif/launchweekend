@@ -64,24 +64,28 @@ const Login = (props) => {
             <span className="ml-2">Log In with Google</span>
           </button>
         </div>
-        <div className="mt-3">
-          <button
-            onClick={() => handleLogin("github")}
-            className="flex justify-center items-center w-full hover:bg-gray-100 text-center py-2 px-4 border border-gray-300 rounded-sm font-medium hover:border-gray-800 focus:shadow-outline focus:outline-none focus:border-gray-400 sm:text-sm hover:bg-white hover:text-gray-900 bg-white text-gray-900 sm:leading-5 transform duration-100 scale-100 active:scale-95"
-          >
-            <img alt="GitHub" className="w-6 h-6" src={githubLogo} />
-            <span className="ml-2">Log In with Github</span>
-          </button>
-        </div>
-        <div className="mt-3">
-          <button
-            onClick={() => handleLogin("twitter")}
-            className="flex justify-center items-center w-full hover:bg-gray-100 text-center py-2 px-4 border border-gray-300 rounded-sm font-medium hover:border-gray-800 focus:shadow-outline focus:outline-none focus:border-gray-400 sm:text-sm hover:bg-white hover:text-gray-900 bg-white text-gray-900 sm:leading-5 transform duration-100 scale-100 active:scale-95"
-          >
-            <img alt="Twitter" className="w-6 h-6" src={twitterLogo} />
-            <span className="ml-2">Log In with Twitter</span>
-          </button>
-        </div>
+        {false && (
+          <>
+            <div className="mt-3">
+              <button
+                onClick={() => handleLogin("github")}
+                className="flex justify-center items-center w-full hover:bg-gray-100 text-center py-2 px-4 border border-gray-300 rounded-sm font-medium hover:border-gray-800 focus:shadow-outline focus:outline-none focus:border-gray-400 sm:text-sm hover:bg-white hover:text-gray-900 bg-white text-gray-900 sm:leading-5 transform duration-100 scale-100 active:scale-95"
+              >
+                <img alt="GitHub" className="w-6 h-6" src={githubLogo} />
+                <span className="ml-2">Log In with Github</span>
+              </button>
+            </div>
+            <div className="mt-3">
+              <button
+                onClick={() => handleLogin("twitter")}
+                className="flex justify-center items-center w-full hover:bg-gray-100 text-center py-2 px-4 border border-gray-300 rounded-sm font-medium hover:border-gray-800 focus:shadow-outline focus:outline-none focus:border-gray-400 sm:text-sm hover:bg-white hover:text-gray-900 bg-white text-gray-900 sm:leading-5 transform duration-100 scale-100 active:scale-95"
+              >
+                <img alt="Twitter" className="w-6 h-6" src={twitterLogo} />
+                <span className="ml-2">Log In with Twitter</span>
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

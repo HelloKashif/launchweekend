@@ -1,21 +1,22 @@
 import Head from "next/head";
 import Link from "next/link";
 
-import { formatDuration, intervalToDuration } from "date-fns";
+import { formatDuration, intervalToDuration, format } from "date-fns";
 
 const Countdown = (props) => {
   const { endDate } = props;
   const [duration, setDuration] = React.useState(makeDuration(endDate));
   React.useEffect(() => {
-    setInterval(() => {
+    const timer = setInterval(() => {
       setDuration(makeDuration(endDate));
     }, 1000);
+    return () => clearInterval(timer);
   }, [endDate]);
   return (
     <div className="text-lg sm:text-2xl text-center font-bold text-gray-900 px-6 py-3 inline-block rounded-sm bg-white">
-      <div className="flex justify-center">
+      <div className="flex justify-center space-x-2">
         {duration.years > 0 && (
-          <section className="px-6 flex flex-col items-center">
+          <section className="w-36 px-6 bg-gray-100 rounded py-3 flex flex-col items-center">
             <span className="text-6xl leading-none font-black">
               {duration.years}
             </span>
@@ -25,7 +26,7 @@ const Countdown = (props) => {
           </section>
         )}
         {duration.months > 0 && (
-          <section className="px-6 flex flex-col items-center">
+          <section className="w-36 px-6 bg-gray-100 rounded py-3 flex flex-col items-center">
             <span className="text-6xl leading-none font-black">
               {duration.months}
             </span>
@@ -35,7 +36,7 @@ const Countdown = (props) => {
           </section>
         )}
         {duration.days > 0 && (
-          <section className="px-6 flex flex-col items-center">
+          <section className="w-36 px-6 bg-gray-100 rounded py-3 flex flex-col items-center">
             <span className="text-6xl leading-none font-black">
               {duration.days}
             </span>
@@ -45,7 +46,7 @@ const Countdown = (props) => {
           </section>
         )}
         {duration.hours > 0 && (
-          <section className="px-6 flex flex-col items-center">
+          <section className="w-36 px-6 bg-gray-100 rounded py-3 flex flex-col items-center">
             <span className="text-6xl leading-none font-black">
               {duration.hours}
             </span>
@@ -55,7 +56,7 @@ const Countdown = (props) => {
           </section>
         )}
         {duration.minutes > 0 && (
-          <section className="px-6 flex flex-col items-center">
+          <section className="w-36 px-6 bg-gray-100 rounded py-3 flex flex-col items-center">
             <span className="text-6xl leading-none font-black">
               {duration.minutes}
             </span>
@@ -64,8 +65,8 @@ const Countdown = (props) => {
             </span>
           </section>
         )}
-        {duration.seconds > 0 && (
-          <section className="px-6 flex flex-col items-center">
+        {duration.days < 1 && duration.seconds > 0 && (
+          <section className="w-36 px-6 bg-gray-100 rounded py-3 flex flex-col items-center">
             <span className="text-6xl leading-none font-black">
               {duration.seconds}
             </span>
@@ -76,7 +77,7 @@ const Countdown = (props) => {
         )}
       </div>
       <span className="text-sm italic font-normal">
-        Ends {endDate.toString()}
+        Ends {format(endDate, "PPPppp")}
       </span>
     </div>
   );
@@ -91,6 +92,7 @@ const makeDuration = (endDate) => {
 };
 
 export default function Home() {
+  //@Todo past date messes up the countdown, fix it
   const endDate = new Date("August 31, 2020 01:00:00 GMT+00:00");
   return (
     <div className="">

@@ -2,14 +2,15 @@ import Head from "next/head";
 import Link from "next/link";
 import Countdown from "../components/countdown";
 import ProjectCard from "../components/project-card-2";
-import { useProjects } from "../hooks/db";
+import { useProjects  } from "../hooks/db";
+import { format, isFuture } from "date-fns";
 
 const RecentProjects = (props) => {
   const projects = useProjects({ limit: 5 });
   return (
     <div>
       <div className="flex items-center justify-between">
-        <h3 className="text-xl font-light">What people are working on</h3>
+        <h3 className="text-xl font-light">What people worked on last time</h3>
         <Link href="/projects">
           <a className="border-b-2 hover:border-white hover:text-white text-gray-200 text-sm font-medium transition duration-150 border-gray-600 px-2 py-1">
             View All Projects
@@ -32,19 +33,21 @@ const RecentProjects = (props) => {
 const config = {
   title: "Launch Weekend",
   description: `
-          Launch Weekend is a monthly hackathon where your build something on
-          your own and release it in public within 48 hours.
+          Launch Weekend is an online monthly hackathon where your build something on
+          your own and release it in public within 48 hours. We start on the last weekend of the month at 1:00GMT+0.
     `,
 };
 
 export default function Home() {
   //@Todo past date messes up the countdown, fix it
   const endDate = new Date("August 31, 2020 01:00:00 GMT+00:00");
+  const nextEvent = new Date("September 26, 2020 01:00:00 GMT+00:00");
   return (
     <div className="">
       <Head>
         <title>Launch Weekend</title>
         <link rel="icon" href="/favicon.ico" />
+        <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
       </Head>
 
       <main className="mt-12 sm:mt-24 mb-24 px-2 sm:px-0">
@@ -54,12 +57,27 @@ export default function Home() {
         <p className="mt-10 text-lg sm:text-xl sm:text-center max-w-xl mx-auto">
           {config.description}
         </p>
+        {
+          isFuture(endDate) && (
+            <div className="my-8 mx-auto flex flex-col sm:items-center">
+              <div className="border-2 border-teal-200 rounded-md px-4 py-6 flex flex-col sm:items-center">
+                <span className="uppercase tracking-wide">
+                  Current Event Ending In
+                </span>
+                <Countdown endDate={endDate} />
+              </div>
+            </div>
+          )
+        }
         <div className="my-8 mx-auto flex flex-col sm:items-center">
-          <div className="border-2 border-teal-200 rounded-md px-4 py-6 flex flex-col sm:items-center">
-            <span className="uppercase tracking-wide">
-              Current Event Ending In
+          <div className="border-2 rounded-md border-gray-400 px-10 py-5 flex flex-col sm:items-center">
+            <span className="text-lg font-light">
+              Next Event Starts {format(nextEvent, "PPpp")}
             </span>
-            <Countdown endDate={endDate} />
+              <span className="text-gray-300 my-2 flex items-center">
+                  <span className="mr-1">Need a reminder?</span>
+              <a href="https://twitter.com/HelloKashif?ref_src=twsrc%5Etfw" className="twitter-follow-button" data-size="large" data-dnt="true" data-show-count="false">Follow @HelloKashif</a>
+              </span>
           </div>
         </div>
       </main>

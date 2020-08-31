@@ -1,6 +1,6 @@
 import React from "react";
 
-export default (props) => {
+const Modal =  (props) => {
   const { open } = props;
 
   return (
@@ -16,3 +16,5 @@ export default (props) => {
     </div>
   );
 };
+
+export default Modal

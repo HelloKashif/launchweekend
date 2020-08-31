@@ -23,29 +23,31 @@ const Header = (props) => {
           </a>
         </Link>
       </div>
-      {user ? (
-        <div className="flex justify-end items-center space-x-4">
+      <div className="flex items-center space-x-2">
           <Link href="/faq">
-            <a className="hidden sm:inline-block hover:bg-gray-600 px-3 rounded inline-block">
+            <a className="hover:bg-gray-600 px-3 rounded inline-block">
               FAQ
             </a>
           </Link>
-          <Link href="/projects/create">
-            <a className="hidden sm:inline-block hover:bg-gray-600 px-3 rounded inline-block">
-              New Project
-            </a>
-          </Link>
-          <ProfileDropdown />
+          {user ? (
+            <div className="flex justify-end items-center space-x-4">
+              <Link href="/projects/create">
+                <a className="hover:bg-gray-600 px-3 rounded inline-block">
+                  New Project
+                </a>
+              </Link>
+              <ProfileDropdown />
+            </div>
+          ) : (
+            <div>
+              <Link href="/login">
+                <a className="inline-block border hover:bg-white hover:text-gray-900 transition duration-150 rounded text-sm leading-none px-4 py-2 font-medium">
+                  Login
+                </a>
+              </Link>
+            </div>
+          )}
         </div>
-      ) : (
-        <div>
-          <Link href="/login">
-            <a className="inline-block border hover:bg-white hover:text-gray-900 transition duration-150 rounded text-sm leading-none px-4 py-2 font-medium">
-              Login
-            </a>
-          </Link>
-        </div>
-      )}
     </header>
   );
 };

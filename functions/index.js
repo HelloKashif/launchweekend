@@ -1,7 +1,9 @@
 const functions = require("firebase-functions");
-var admin = require("firebase-admin");
-var app = admin.initializeApp();
-const firestore = app.firestore();
+const admin = require("./admin");
+const firestore = admin.firestore();
+
+const schedules = require("./schedules");
+exports.sched_activate_event = schedules.sched_activate_event;
 
 const validateAuth = (context) => {
   if (!context || !context.auth) {

@@ -135,3 +135,15 @@ Security:
 FUTURE:
 --------
     How about teams and submitting a project as a team??
+
+
+- First project: Build the hackathon site itself.
+- Community feedback
+- Voting system
+- Check our people streaming
+- Make something public in 48hrs
+- Group working together.
+- new fonts
+- google analytics
+- public url in porjects schema
+- move faq to separate page

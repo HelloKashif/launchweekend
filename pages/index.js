@@ -2,7 +2,8 @@ import Head from "next/head";
 import Link from "next/link";
 import Countdown from "../components/countdown";
 import ProjectCard from "../components/project-card-2";
-import { useProjects  } from "../hooks/db";
+import { useProjects } from "../hooks/db";
+import db from "../lib/db";
 import { format, isFuture } from "date-fns";
 
 const RecentProjects = (props) => {
@@ -38,16 +39,24 @@ const config = {
     `,
 };
 
-export default function Home() {
-  //@Todo past date messes up the countdown, fix it
-  const endDate = new Date("August 31, 2020 01:00:00 GMT+00:00");
-  const nextEvent = new Date("September 26, 2020 01:00:00 GMT+00:00");
+export default function Home(props) {
+  let nextEvent, endDate;
+  if (props.upcomingEvent) {
+    nextEvent = new Date(props.upcomingEvent.startDate * 1000);
+  }
+  if (props.activeEvent) {
+    endDate = new Date(props.activeEvent.endDate * 1000);
+  }
   return (
     <div className="">
       <Head>
         <title>Launch Weekend</title>
         <link rel="icon" href="/favicon.ico" />
-        <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
+        <script
+          async
+          src="https://platform.twitter.com/widgets.js"
+          charSet="utf-8"
+        ></script>
       </Head>
 
       <main className="mt-12 sm:mt-24 mb-24 px-2 sm:px-0">
@@ -57,27 +66,36 @@ export default function Home() {
         <p className="mt-10 text-lg sm:text-xl sm:text-center max-w-xl mx-auto">
           {config.description}
         </p>
-        {
-          isFuture(endDate) && (
-            <div className="my-8 mx-auto flex flex-col sm:items-center">
-              <div className="border-2 border-teal-200 rounded-md px-4 py-6 flex flex-col sm:items-center">
-                <span className="uppercase tracking-wide">
-                  Current Event Ending In
-                </span>
-                <Countdown endDate={endDate} />
-              </div>
+        {isFuture(endDate) && (
+          <div className="my-8 mx-auto flex flex-col sm:items-center">
+            <div className="border-2 border-teal-200 rounded-md px-4 py-6 flex flex-col sm:items-center">
+              <span className="uppercase tracking-wide">
+                Current Event Ending In
+              </span>
+              <Countdown date={endDate} />
             </div>
-          )
-        }
+          </div>
+        )}
         <div className="my-8 mx-auto flex flex-col sm:items-center">
           <div className="border-2 rounded-md border-gray-400 px-10 py-5 flex flex-col sm:items-center">
-            <span className="text-lg font-light">
-              Next Event Starts {format(nextEvent, "PPpp")}
+            <span className="text-lg font-light"></span>
+            <Countdown
+              prefix="Next Event Starts "
+              size="small"
+              date={nextEvent}
+            />
+            <span className="text-gray-300 my-2 flex items-center">
+              <span className="mr-1">Need a reminder for next one?</span>
+              <a
+                href="https://twitter.com/HelloKashif?ref_src=twsrc%5Etfw"
+                className="twitter-follow-button"
+                data-size="large"
+                data-dnt="true"
+                data-show-count="false"
+              >
+                Follow @HelloKashif
+              </a>
             </span>
-              <span className="text-gray-300 my-2 flex items-center">
-                  <span className="mr-1">Need a reminder?</span>
-              <a href="https://twitter.com/HelloKashif?ref_src=twsrc%5Etfw" className="twitter-follow-button" data-size="large" data-dnt="true" data-show-count="false">Follow @HelloKashif</a>
-              </span>
           </div>
         </div>
       </main>
@@ -86,4 +104,12 @@ export default function Home() {
       </section>
     </div>
   );
+}
+
+export async function getStaticProps(context) {
+  let props = {
+    activeEvent: await db.getActiveEvent(),
+    upcomingEvent: await db.getUpcomingEvent(),
+  };
+  return { props };
 }

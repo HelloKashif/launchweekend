@@ -106,7 +106,7 @@ const CreateProject = (props) => {
         )}
         {error && (
           <div className="max-w-md mx-auto mt-4">
-            <p className="bg-red-400 text-gray-50 font-medium rounded-sm text-sm text-center py-1 px-2">
+            <p className="shake bg-red-400 text-gray-50 font-medium rounded-sm text-sm text-center py-1 px-2">
               {error}
             </p>
           </div>

@@ -41,6 +41,7 @@ const config = {
 
 export default function Home(props) {
   let nextEvent, endDate;
+  console.log(props);
   if (props.upcomingEvent) {
     nextEvent = new Date(props.upcomingEvent.startDate * 1000);
   }

@@ -89,7 +89,7 @@ export default function Home(props) {
               <span className="mr-1">Need a reminder for next one?</span>
               <a
                 href="https://twitter.com/HelloKashif?ref_src=twsrc%5Etfw"
-                className="twitter-follow-button"
+                className="twitter-follow-button bg-blue-600 px-3 py-1 rounded"
                 data-size="large"
                 data-dnt="true"
                 data-show-count="false"
@@ -107,7 +107,7 @@ export default function Home(props) {
   );
 }
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
   let props = {
     activeEvent: await db.getActiveEvent(),
     upcomingEvent: await db.getUpcomingEvent(),
